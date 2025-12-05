@@ -43,7 +43,7 @@ def datetime_process(df):
     df['DAYOFWEEK'] = df['INCDATE'].dt.day_name()
     df['HOUR'] = df['INCDTTM'].dt.hour
     #string formatting
-    df['MONTHNAME'] = df['INCDATE'].dt.strftime("%b")
+    df['MONTHNAME'] = df['INCDATE'].dt.strftime("%B")
     return df
 
 def daylight_savings_marking(df):
@@ -115,4 +115,5 @@ def speeding_boolean(df):
     # Anything missing filled as false
     }).fillna(False)
     return df
+
 
