@@ -44,7 +44,7 @@ def plot_day_of_week(df):
     df = df.copy()
     df['WEEKDAY'] = df['INCDATE'].dt.dayofweek
     df['DAYNAME'] = df['INCDATE'].dt.day_name()
-
+    # List for days of the week
     ordered_days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     # Creating counts for day of week collisions
     counts = df.groupby('DAYNAME').size().reindex(ordered_days).fillna(0)
@@ -63,7 +63,7 @@ def plot_day_of_week(df):
 def plot_monthly_trend(df):
     """Line graph for showcasing number of crashes for each month"""
     st.subheader("Monthly Collision Trends for 2020 - 2025")
-    # Array for shortened month names
+    # List for shortened month names
     month_order = [
         "Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -197,4 +197,5 @@ def plot_dangerous_streets(df):
     st.pyplot(fig)
 
     st.write(streetcounts.to_frame("Crash Count"))
+
 
