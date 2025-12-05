@@ -113,28 +113,28 @@ def plot_dst_trend(df):
     for event in pivot.columns:
         ax.plot(pivot.index, pivot[event], marker="o", linewidth=2, label=event)
         # Labeling day values as days before and after dst
-        friendly_labels = {
-            -7: "7 Before", -6: "6 Before", -5: "5 Before", -4: "4 Before",
-            -3: "3 Before", -2: "2 Before", -1: "1 Before",
-            0: "DST Day",
-            1: "1 After", 2: "2 After", 3: "3 After", 4: "4 After",
-            5: "5 After", 6: "6 After", 7: "7 After"
-        }
+    friendly_labels = {
+        -7: "7 Before", -6: "6 Before", -5: "5 Before", -4: "4 Before",
+        -3: "3 Before", -2: "2 Before", -1: "1 Before",
+        0: "DST Day",
+        1: "1 After", 2: "2 After", 3: "3 After", 4: "4 After",
+        5: "5 After", 6: "6 After", 7: "7 After"
+    }
 
-        ax.set_xticks(list(friendly_labels.keys()))
-        ax.set_xticklabels(list(friendly_labels.values()), rotation=45, ha="right")
+    ax.set_xticks(list(friendly_labels.keys()))
+    ax.set_xticklabels(list(friendly_labels.values()), rotation=45, ha="right")
 
-        ax.axvline(0, color="gray", linestyle="--", alpha=0.7)
-        ax.text(0, ax.get_ylim()[1], "DST Change", ha="center", va="bottom", fontsize=12)
+    ax.axvline(0, color="gray", linestyle="--", alpha=0.7)
+    ax.text(0, ax.get_ylim()[1], " ", ha="center", va="bottom", fontsize=12)
 
-        ax.set_title("Collision Counts 7 Days Before and After DST Changes", fontsize=18)
-        ax.set_xlabel("Days Relative to DST Change", fontsize=14)
-        ax.set_ylabel("Number of Collisions", fontsize=14)
+    ax.set_title("Collision Counts 7 Days Before and After DST Changes", fontsize=18)
+    ax.set_xlabel("Days Relative to DST Change", fontsize=14)
+    ax.set_ylabel("Number of Collisions", fontsize=14)
 
-        ax.grid(axis="y", linestyle="--", alpha=0.4)
-        ax.legend(title="DST Event")
+    ax.grid(axis="y", linestyle="--", alpha=0.4)
+    ax.legend(title="DST Event")
 
-        st.pyplot(fig)
+    st.pyplot(fig)
 
 def plot_yoy_full_year(df):
     """Plots the percentage change of crashes from 2020 to 2024."""
@@ -197,3 +197,4 @@ def plot_dangerous_streets(df):
     st.pyplot(fig)
 
     st.write(streetcounts.to_frame("Crash Count"))
+
