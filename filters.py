@@ -117,6 +117,12 @@ def apply_filters(df):
     if parkedcarflag:
         mask &= df['HITPARKEDBOOL']
 
+    if selected_months:
+        mask &= df['MONTHNAME'].isin(selected_months)
+
+    if selected_years:
+        mask&= df['YEAR'].isin(selected_years)
+
     if selected_road:
         mask &= df['ROADCOND'].isin(selected_road)
 
@@ -131,4 +137,5 @@ def apply_filters(df):
     
     filtered_df = df[mask]
     
+
     return filtered_df
