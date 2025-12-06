@@ -151,7 +151,7 @@ def plot_yoy_full_year(df):
     yearly["PCTCHANGE"] = yearly["COUNT"].pct_change() * 100
     # Creating figure
     fig, ax = plt.subplots()
-    ax.bar(yearly["YEAR"], yearly["COUNT"])
+    ax.bar(yearly["YEAR"], yearly["COUNT"], color="#5A8FFE")
     ax.set_xlabel("Year")
     ax.set_ylabel("Total Collisions")
     ax.set_title("Total Crashes per Year (2020-2024)")
@@ -175,7 +175,7 @@ def plot_yoy_partial(df):
     counts["PCTCHANGE"] = counts["COUNT"].pct_change() *100
     # Creating figure
     fig, ax = plt.subplots()
-    ax.bar(counts["YEAR"], counts["COUNT"])
+    ax.bar(counts["YEAR"], counts["COUNT"], color="#5A8FFE")
     ax.set_xlabel("YEAR")
     ax.set_ylabel("Collisions (Jan-Sept)")
     ax.set_title("Jan-Sept Crash Totals (2024 - 2025)")
@@ -201,6 +201,7 @@ def plot_dangerous_streets(df):
     st.pyplot(fig)
 
     st.write(streetcounts.to_frame("Crash Count"))
+
 
 
 
