@@ -63,12 +63,6 @@ def plot_day_of_week(df):
 def plot_monthly_trend(df):
     """Line graph for showcasing number of crashes for each month"""
     st.subheader("Monthly Collision Trends for 2020 - 2025")
-    # Cleaning MONTHNAME of any unnecessary characters
-    monthly = df.copy()
-    monthly['MONTHNAME'] = monthly['MONTHNAME'].astype(str).str.strip()
-    # Removing nan elements
-    monthly['MONTHNAME'] = monthly['MONTHNAME'].replace("nan", pd.NA)
-    monthly = monthly.dropna(subset=['MONTHNAME'])
     # List for shortened month names
     month_order = [
         "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -91,7 +85,7 @@ def plot_monthly_trend(df):
         subset = monthly[monthly['YEAR'] == year]
         ax.plot(subset['MONTHNAME'], subset['COUNT'], marker="o", label=str(year))
 
-    ax.set_title("Monthly Collision Trends by Year", fontsize=16, color="#FFFFFF")
+    ax.set_title("Monthly Collision Trends by Year", fontsize=16)
     ax.set_xlabel("Month")
     ax.set_ylabel("Collisions")
     ax.legend(title="Year")
@@ -203,6 +197,7 @@ def plot_dangerous_streets(df):
     st.pyplot(fig)
 
     st.write(streetcounts.to_frame("Crash Count"))
+
 
 
 
