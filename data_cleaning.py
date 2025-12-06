@@ -67,7 +67,7 @@ def daylight_savings_marking(df):
         #Creating windows for daylight savings start and end
         startwindow = (df['INCDATE'] >= dst_start - pd.Timedelta(days=7)) & (df['INCDATE'] <= dst_start + pd.Timedelta(days=7))
         endwindow = (df['INCDATE'] >= dst_end - pd.Timedelta(days=7)) & (df['INCDATE'] <= dst_end + pd.Timedelta(days=7))
-        #Dictionary used for easier processing of multiple DST events
+        #df loc used for easier assessment of dst periods and events
         df.loc[startwindow, 'ISDSTPERIOD'] = True
         df.loc[startwindow, 'DSTEVENT'] = 'Spring Forward'
         df.loc[startwindow, 'DAYSFROMDST'] = ((df.loc[startwindow, 'INCDATE'] - dst_start).dt.days)
@@ -109,6 +109,7 @@ def speeding_boolean(df):
     # Anything missing filled as false
     }).fillna(False)
     return df
+
 
 
 
