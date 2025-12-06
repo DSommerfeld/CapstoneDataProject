@@ -67,7 +67,7 @@ def plot_monthly_trend(df):
     monthly = df.copy()
     monthly['MONTHNAME'] = monthly['MONTHNAME'].astype(str).str.strip()
     # Removing nan elements
-    monthly['MONTHNAME'] = monthly['MONTHNAME'].replace("nan", pd.Na)
+    monthly['MONTHNAME'] = monthly['MONTHNAME'].replace("nan", pd.NA)
     monthly = monthly.dropna(subset=['MONTHNAME'])
     # List for shortened month names
     month_order = [
@@ -203,6 +203,7 @@ def plot_dangerous_streets(df):
     st.pyplot(fig)
 
     st.write(streetcounts.to_frame("Crash Count"))
+
 
 
 
