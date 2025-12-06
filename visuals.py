@@ -63,34 +63,37 @@ def plot_day_of_week(df):
 def plot_monthly_trend(df):
     """Line graph for showcasing number of crashes for each month"""
     st.subheader("Monthly Collision Trends for 2020 - 2025")
-    st.write("DEBUGGING MONTHS:", df['MONTHNAME'].unique()) 
-    # List for shortened month names
-    month_order = [
-        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-    ]
+    # Map for shortened month names
+    month_map = {
+        "January": "Jan", "February": "Feb", "March": "Mar", "April": "Apr",
+        "May": "May", "June": "Jun", "July": "Jul", "August": "Aug",
+        "September": "Sep", "October": "Oct", "November": "Nov", "December": "Dec"
+    }
+    month_order = list(month_map.values())
     # Creating counts for month processing
-    monthly = df.groupby(['YEAR', 'MONTHNAME']).size().reset_index(name="COUNT")
+    monthly = df.groupby(['YEAR', 'MONTHNAME']).size().reset_index(name='COUNT')
+    monthly = monthly.dropna(subset=['MONTHNAME', 'YEAR'])
+    monthly['MONTHNAME'] = monthly['MONTHNAME'].astype(str)
+    monthly['MONTHSHORT'] = monthly['MONTHNAME'].map(month_map)
     # Putting shorted month order category for 'MONTHNAME' column
-    monthly['MONTHNAME'] = pd.Categorical(
-        monthly['MONTHNAME'],
+    monthly['MONTHSHORT'] = pd.Categorical(
+        monthly['MONTHSHORT'],
         categories = month_order,
         ordered = True
     )
 
-    monthly = monthly.sort_values(['YEAR', 'MONTHNAME'])
+    monthly = monthly.sort_values(['YEAR', 'MONTHSHORT'])
     # Creating figure
     fig, ax = plt.subplots(figsize=(14, 6))
 
     for year in monthly['YEAR'].unique():
         subset = monthly[monthly['YEAR'] == year]
-        ax.plot(subset['MONTHNAME'], subset['COUNT'], marker="o", label=str(year))
+        ax.plot(subset['MONTHSHORT'], subset['COUNT'], marker="o", label=str(year))
 
-    ax.set_title("Monthly Collision Trends by Year", fontsize=16, color="#00FF00")
+    ax.set_title("Monthly Collision Trends by Year", fontsize=16)
     ax.set_xlabel("Month")
     ax.set_ylabel("Collisions")
     ax.legend(title="Year")
-
     plt.xticks(rotation=0)
     st.pyplot(fig)
 
@@ -198,6 +201,7 @@ def plot_dangerous_streets(df):
     st.pyplot(fig)
 
     st.write(streetcounts.to_frame("Crash Count"))
+
 
 
 
