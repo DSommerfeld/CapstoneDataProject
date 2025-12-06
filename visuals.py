@@ -51,7 +51,7 @@ def plot_day_of_week(df):
 
     fig, ax = plt.subplots(figsize=(12, 6))
     ax.bar(counts.index, counts.values, color="#5A8BBE")
-    ax.set_title("Collisions by Day of Week", fontsize=16, color="#FFFFFF")
+    ax.set_title("Collisions by Day of Week", fontsize=16)
     ax.set_xlabel("")
     ax.set_ylabel("Number of Collisions")
     ax.grid(axis="y", linestyle='--', alpha=0.4)
@@ -85,7 +85,7 @@ def plot_monthly_trend(df):
         subset = monthly[monthly['YEAR'] == year]
         ax.plot(subset['MONTHNAME'], subset['COUNT'], marker="o", label=str(year))
 
-    ax.set_title("Monthly Collision Trends by Year", fontsize=16)
+    ax.set_title("Monthly Collision Trends by Year", fontsize=16, color="#FFFFFF")
     ax.set_xlabel("Month")
     ax.set_ylabel("Collisions")
     ax.legend(title="Year")
@@ -197,6 +197,7 @@ def plot_dangerous_streets(df):
     st.pyplot(fig)
 
     st.write(streetcounts.to_frame("Crash Count"))
+
 
 
 
