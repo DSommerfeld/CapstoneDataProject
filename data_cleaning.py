@@ -22,14 +22,12 @@ def clean_location(df):
     )
     # New column overwrite to also remove NSEW
     df['MAINSTREET'] = df['MAINSTREET'].str.replace(
+        # Erases mentions of North, South, East, West
         r"\b(N|S|E|W)\b", "", regex=True
-        #Erases mentions of North, South, East, West
     )
-
     df['MAINSTREET'] = df['MAINSTREET'].str.replace(r"\s+", " ", regex=True)
     # Replacing missing cells with unknown
     df['MAINSTREET'] = df['MAINSTREET'].replace("", 'UNKNOWN')
-
     return df
 
 def datetime_process(df):
@@ -54,7 +52,6 @@ def daylight_savings_marking(df):
     df['ISDSTPERIOD'] = False
     df['DSTEVENT'] = None
     df['DAYSFROMDST'] = None
-
     years = df['INCDATE'].dt.year.dropna().unique()
 
     for year in years:
@@ -67,7 +64,6 @@ def daylight_savings_marking(df):
         november = pd.date_range(f'{year}-11-01', f'{year}-11-30', freq='D')
         november_sundays = [d for d in november if d.weekday() == 6]
         dst_end = november_sundays[0]
-
         #Creating windows for daylight savings start and end
         startwindow = (df['INCDATE'] >= dst_start - pd.Timedelta(days=7)) & (df['INCDATE'] <= dst_start + pd.Timedelta(days=7))
         endwindow = (df['INCDATE'] >= dst_end - pd.Timedelta(days=7)) & (df['INCDATE'] <= dst_end + pd.Timedelta(days=7))
@@ -75,11 +71,9 @@ def daylight_savings_marking(df):
         df.loc[startwindow, 'ISDSTPERIOD'] = True
         df.loc[startwindow, 'DSTEVENT'] = 'Spring Forward'
         df.loc[startwindow, 'DAYSFROMDST'] = ((df.loc[startwindow, 'INCDATE'] - dst_start).dt.days)
-
         df.loc[endwindow, 'ISDSTPERIOD'] = True
         df.loc[endwindow, 'DSTEVENT'] = 'Fall Back'
         df.loc[endwindow , 'DAYSFROMDST'] = ((df.loc[endwindow, 'INCDATE'] - dst_end).dt.days)
-
     return df
 
 def boolean_flags(df):
@@ -95,7 +89,6 @@ def boolean_flags(df):
     df['HASSERIOUSINJURY'] = df['SERIOUSINJURIES'] > 0
     # Added to hasfatality if fatalities is 1 or more
     df['HASFATALITY'] = df['FATALITIES'] > 0
-
     return df
 
 def parked_car_boolean(df):
@@ -116,6 +109,7 @@ def speeding_boolean(df):
     # Anything missing filled as false
     }).fillna(False)
     return df
+
 
 
 
