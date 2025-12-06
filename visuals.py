@@ -21,7 +21,7 @@ def plot_time_distribution(df):
     # Creating figure
     fig, ax = plt.subplots(figsize=(14, 6))
     # Colors for bars
-    ax.bar(hourly['HOURLABEL'], hourly['COUNT'], color="#5A8BBE")
+    ax.bar(hourly['HOURLABEL'], hourly['COUNT'], color="#FFFFFF")
 
     ax.set_title("Collisions by Hour of Day", fontsize=18)
     ax.set_xlabel("Hour of Day", fontsize=14)
@@ -197,5 +197,6 @@ def plot_dangerous_streets(df):
     st.pyplot(fig)
 
     st.write(streetcounts.to_frame("Crash Count"))
+
 
 
