@@ -34,7 +34,7 @@ st.markdown(
 
 # Loading Dataset
 file_path = "SDOT_Collisions_All_Years_Reworked20t25NoInattentionID.xlsx"
-
+# Caching data
 @st.cache_data(show_spinner=True)
 def load_data(path):
     """Method for loading the dataset. Tries opening excel file, 
@@ -46,7 +46,7 @@ def load_data(path):
         st.stop()
 # Creating variable for loading data
 df = load_data(file_path)
-
+# Caching data
 @st.cache_data(show_spinner=True)
 def clean_data(df):
     """Applying methods from data cleaning file."""
@@ -76,3 +76,4 @@ plot_monthly_trend(filtered_df)
 plot_dst_trend(filtered_df)
 plot_yoy_full_year(filtered_df)
 plot_yoy_partial(filtered_df)
+
