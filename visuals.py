@@ -63,6 +63,8 @@ def plot_day_of_week(df):
 def plot_monthly_trend(df):
     """Line graph for showcasing number of crashes for each month"""
     st.subheader("Monthly Collision Trends for 2020 - 2025")
+    #Cleaning MONTHNAME of any unnecessary characters
+    monthly["MONTHNAME"] = monthly["MONTHNAME"].astype(str).str.strip()
     # List for shortened month names
     month_order = [
         "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -197,6 +199,7 @@ def plot_dangerous_streets(df):
     st.pyplot(fig)
 
     st.write(streetcounts.to_frame("Crash Count"))
+
 
 
 
