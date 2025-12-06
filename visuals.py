@@ -50,7 +50,7 @@ def plot_day_of_week(df):
     counts = df.groupby('DAYNAME').size().reindex(ordered_days).fillna(0)
 
     fig, ax = plt.subplots(figsize=(12, 6))
-    ax.bar(counts.index, counts.values, color="#5A8BBE")
+    ax.bar(counts.index, counts.values, color="#5A8FFE")
     ax.set_title("Collisions by Day of Week", fontsize=16)
     ax.set_xlabel("")
     ax.set_ylabel("Number of Collisions")
@@ -197,6 +197,7 @@ def plot_dangerous_streets(df):
     st.pyplot(fig)
 
     st.write(streetcounts.to_frame("Crash Count"))
+
 
 
 
