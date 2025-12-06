@@ -10,6 +10,7 @@ import pandas as pd
 def clean_location(df):
     """Cleans the location column so instances of AND and BETWEEN are 
     eliminated."""
+    # Removal of spaces
     df['LOCATION'] = df['LOCATION'].astype(str).str.upper().str.strip()
     # New column created for removing AND and BETWEEN keywords
     df['MAINSTREET'] = (
@@ -115,5 +116,6 @@ def speeding_boolean(df):
     # Anything missing filled as false
     }).fillna(False)
     return df
+
 
 
