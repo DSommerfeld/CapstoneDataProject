@@ -193,7 +193,7 @@ def plot_dangerous_streets(df):
     # Creating figure
     fig, ax = plt.subplots()
     # Horizontal bar chart
-    ax.barh(streetcounts.index, streetcounts.values)
+    ax.barh(streetcounts.index, streetcounts.values, color="#5A8FFE")
     ax.set_xlabel("Number of Collisions")
     ax.set_ylabel("Street Name")
     ax.set_title("Top 10 Streets with Most Collisions")
@@ -201,6 +201,7 @@ def plot_dangerous_streets(df):
     st.pyplot(fig)
 
     st.write(streetcounts.to_frame("Crash Count"))
+
 
 
 
