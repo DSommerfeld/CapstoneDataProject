@@ -86,7 +86,7 @@ def plot_monthly_trend(df):
         subset = monthly[monthly['YEAR'] == year]
         ax.plot(subset['MONTHNAME'], subset['COUNT'], marker="o", label=str(year))
 
-    ax.set_title("Monthly Collision Trends by Year", fontsize=16)
+    ax.set_title("Monthly Collision Trends by Year", fontsize=16, color="#00FF00")
     ax.set_xlabel("Month")
     ax.set_ylabel("Collisions")
     ax.legend(title="Year")
@@ -198,6 +198,7 @@ def plot_dangerous_streets(df):
     st.pyplot(fig)
 
     st.write(streetcounts.to_frame("Crash Count"))
+
 
 
 
